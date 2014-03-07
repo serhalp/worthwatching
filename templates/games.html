@@ -2,18 +2,33 @@
 {% block body %}
   <div class="center-block date-picker text-center h4">
     <div class="pull-left"><span class="glyphicon glyphicon-chevron-left"></span></div>
-    Today
+    <button type="button" class="btn btn-default">Today</button>
     <div class="pull-right"><span class="glyphicon glyphicon-chevron-right"></span></div>
   </div>
   <div class="row">
     {% for game in games %}
       <div class="col-6 col-md-3">
-        <div class="game">
-          <div class="team {{ game.away_team|lower }}"></div>
-          <div class="team home {{ game.home_team|lower }}"></div>
-          <p class="text-center">
-            {{ game.est }} -  {{ game.rating }}
-          </p>
+        <div class="game well well-sm text-center">
+          <div class="row game-time">
+            <div class="col-12">
+              <span class="text-center">
+                {{ game.est }}
+              </span>
+            </div>
+          </div>
+          <div class="row game-teams">
+            <div class="col-12">
+              <div class="team {{ game.away_team|lower }}"></div>
+              <div class="team home {{ game.home_team|lower }}"></div>
+            </div>
+          </div>
+          <div class="row game-rating">
+            <div class="col-12">
+              <span class="well well-sm text-center">
+                <strong>{{ game.rating }}</strong>
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     {% endfor %}

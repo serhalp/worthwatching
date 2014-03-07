@@ -4,11 +4,27 @@
   margin-bottom: 30px;
 }
 
+.date-picker div {
+  margin-top: 8px; /* terrible hack to vertical-align arrows */
+}
+
 .game {
   width: 200px;
-  height: 125px;
+  height: 165px;
   display: inline-block;
   vertical-align: middle;
+}
+
+.game-time {
+  height: 10px;
+}
+
+.game-teams {
+  height: 110px;
+}
+
+.game-rating {
+  height: 20px;
 }
 
 .team {
