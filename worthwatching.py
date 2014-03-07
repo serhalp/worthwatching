@@ -1,4 +1,5 @@
 import datetime
+import pytz
 import flask
 from mongoengine import *
 from models import Game, Review
@@ -10,6 +11,8 @@ app.config.update(dict(
     MONGODB_SETTINGS = { 'DB': 'worthwatching-nhl' },
     SECRET_KEY = 'WhatIsThis'
 ))
+
+est = pytz.timezone('US/Eastern')
 
 db = None
 
@@ -26,20 +29,21 @@ def get_todays_games():
     print 'next_date:', next_date
     return Game.objects(Q(start__gte = target_date) & Q(start__lt = next_date))
 
-def rate(games):
+def annotate(games):
     for game in games:
+        game.est = pytz.utc.localize(game.start).astimezone(est).time().strftime('%-I:%M %p')
         game.rating = Review.objects(game = game).average('rating')
     return games
 
 @app.route('/')
 def show_games():
     games = get_todays_games()
-    return flask.render_template('games.html', games = rate(games))
+    return flask.render_template('games.html', games = annotate(games))
 
 @app.route('/game/<gameid>')
 def show_game(gameid):
     games = [get_game(gameid)]
-    return flask.render_template('games.html', games = rate(games))
+    return flask.render_template('games.html', games = annotate(games))
 
 @app.route('/review')
 def post_review():

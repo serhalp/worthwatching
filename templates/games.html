@@ -1,8 +1,21 @@
 {% extends "layout.html" %}
 {% block body %}
-  <ul class="games">
+  <div class="center-block date-picker text-center h4">
+    <div class="pull-left"><span class="glyphicon glyphicon-chevron-left"></span></div>
+    Today
+    <div class="pull-right"><span class="glyphicon glyphicon-chevron-right"></span></div>
+  </div>
+  <div class="row">
     {% for game in games %}
-      <li>{{ game.start }} - {{ game.away_team }} @ {{ game.home_team }}: {{ game.rating }}</li>
+      <div class="col-6 col-md-3">
+        <div class="game">
+          <div class="team {{ game.away_team|lower }}"></div>
+          <div class="team home {{ game.home_team|lower }}"></div>
+          <p class="text-center">
+            {{ game.est }} -  {{ game.rating }}
+          </p>
+        </div>
+      </div>
     {% endfor %}
-  </ul>
+  </div>
 {% endblock %}
