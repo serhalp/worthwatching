@@ -4,6 +4,8 @@ import flask
 from mongoengine import *
 from models import Game, Review
 
+connect('worthwatching-nhl')
+
 app = flask.Flask('worthwatching')
 
 app.config.update(dict(
@@ -14,19 +16,12 @@ app.config.update(dict(
 
 est = pytz.timezone('US/Eastern')
 
-db = None
-
-def init_db():
-    connect('worthwatching-nhl')
-
 def get_game(gameid):
     return Game.objects(gameid = gameid).first()
 
 def get_todays_games():
     target_date = datetime.datetime.combine(datetime.datetime.utcnow().date(), datetime.time(14))
-    print 'target_date:', target_date
     next_date = target_date + datetime.timedelta(days = 1)
-    print 'next_date:', next_date
     return Game.objects(Q(start__gte = target_date) & Q(start__lt = next_date))
 
 def annotate(games):
@@ -54,5 +49,4 @@ def post_review():
     return 'done'
 
 if __name__ == '__main__':
-    init_db()
-    app.run()
+    app.run(host = '0.0.0.0', port = 80)
