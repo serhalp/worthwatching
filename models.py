@@ -9,7 +9,7 @@ class Game(Document):
 
     meta = {
         'allow_inheritance': True,
-        'indexes': ['-gameid']
+        'indexes': ['-gameid', '-start']
     }
 
 class Review(Document):

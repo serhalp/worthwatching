@@ -7,6 +7,8 @@
 
   <title>Is it worth watching? — crowdsourced NHL entertainment value</title>
 
+  <link rel="stylesheet" href="{{ url_for('static', filename='style/jquery.nouislider.min.css') }}" />
+
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css" />
 
@@ -19,7 +21,10 @@
 </head>
 <body>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script src="{{ url_for('static', filename='js/jquery.nouislider.min.js') }}"></script>
   <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 
   <div class="container-fluid padded">
     <div class="page-header">
@@ -27,6 +32,17 @@
     </div>
 
     {% block body %}{% endblock %}
+
+    <hr />
+    <div class="row">
+      <div class="col-xs-12">
+        Copyright 2014 Philippe Serhal.
+        This site bears no affiliation to the National Hockey League nor any of its teams.
+      </div>
+      <div class="col-xs-12">
+        &nbsp;
+      </div>
+    </div>
   </div>
 </body>
 </html>

@@ -27,6 +27,12 @@
   height: 20px;
 }
 
+.game-slider .noUiSlider {
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .team {
   position: absolute;
   background-image: url(../img/logos.png);

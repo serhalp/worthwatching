@@ -8,7 +8,7 @@
   <div class="row">
     {% for game in games %}
       <div class="col-xs-6 col-sm-4 col-md-3">
-        <div class="game well well-sm text-center">
+        <div class="game well well-sm text-center" id="{{ game.gameid}}">
           <div class="row game-time">
             <div class="col-12">
               <span class="text-center">
@@ -24,9 +24,13 @@
           </div>
           <div class="row game-rating">
             <div class="col-12">
-              <span class="well well-sm text-center">
-                <strong>{{ game.rating }}</strong>
+              <span class="well well-sm text-center game-rating-content">
               </span>
+            </div>
+          </div>
+          <div class="row game-slider hidden">
+            <div class="col-12">
+              <div class="noUiSlider"></div>
             </div>
           </div>
         </div>
