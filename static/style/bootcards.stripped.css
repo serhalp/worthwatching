@@ -1,0 +1,51 @@
+/* SUMMARY CARD */
+
+.bootcards-summary .panel-body {
+	padding: 7px 25px;
+}
+
+.bootcards-summary .panel-body > .row > div {
+	padding: 8px;
+}
+
+.bootcards-summary .panel-body .bootcards-summary-item {
+	background: #f5f5f5;
+	display: block;
+	border-radius: 4px;
+	padding: 25px 10px;
+	text-align: center;
+}
+
+@media (max-width:400px) {
+	.bootcards-summary .panel-body .bootcards-summary-item {
+		padding: 15px 5px;
+	}	
+}
+
+.bootcards-summary .panel-body .bootcards-summary-item:hover {
+	text-decoration: none;
+	background: #eee;
+}
+
+.bootcards-summary .panel-body .bootcards-summary-item i {
+	color: #bbb;
+	display: block;
+	text-align: center;
+	margin-bottom: 5px;
+}
+
+.bootcards-summary .panel-body .bootcards-summary-item h1 {
+	margin: 0;
+	font-weight: bold;
+	white-space: nowrap;
+	font-size: 26px;
+	line-height: 1;
+	text-align: center;
+}
+
+.bootcards-summary .panel-body .bootcards-summary-item h1 span {
+	font-weight: normal;
+	font-size: 12px;
+	display: block;
+	color: #333;
+}

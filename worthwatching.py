@@ -32,8 +32,9 @@ def get_games_by_date(date):
 
 def annotate(game):
     game.est = pytz.utc.localize(game.start).astimezone(est).time().strftime('%-I:%M %p')
+    ratings = Review.objects(game = game)
     game.ratings = {
-        'avg': int(round(Review.objects(game = game).average('rating')))
+        'avg': int(round(ratings.average('rating'))) if ratings else None
     }
     return game
 

@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css" />
 
+  <link rel="stylesheet" href="{{ url_for('static', filename='style/bootcards.stripped.css') }}" />
+
   <link rel="stylesheet" href="{{ url_for('static', filename='style/style.css') }}" />
 
   <!--[if lt IE 9]>
@@ -31,13 +33,12 @@
       <h1>Is the game worth watching? <small>crowdsourcing it in real time</small></h1>
     </div>
 
-    {% block body %}{% endblock %}
+    {% block content %}{% endblock %}
 
-    <hr />
     <div class="row">
       <div class="col-xs-12">
         Copyright 2014 Philippe Serhal.
-        This site bears no affiliation to the National Hockey League nor any of its teams.
+        This site claims no affiliation to the National Hockey League nor to any of its teams.
       </div>
       <div class="col-xs-12">
         &nbsp;

@@ -1,40 +1,36 @@
 {% extends "layout.html" %}
-{% block body %}
-  <div class="center-block date-picker text-center h4">
+{% block content %}
+  <div class="center-block date-picker text-center">
     <div class="pull-left"><span class="glyphicon glyphicon-chevron-left"></span></div>
-    <a class="btn btn-default" href="/">Today</a>
+    <a class="btn btn-default" role="button" href="/">Today</a>
     <div class="pull-right"><span class="glyphicon glyphicon-chevron-right"></span></div>
   </div>
-  <div class="row">
-    {% for game in games %}
-      <div class="col-xs-6 col-sm-4 col-md-3">
-        <div class="game well well-sm text-center" id="{{ game.gameid}}">
-          <div class="row game-time">
-            <div class="col-12">
-              <span class="text-center">
-                {{ game.est }}
-              </span>
+
+  <div class="panel panel-default borderless bootcards-summary">
+    <div class="panel-body">
+      <div class="row">
+        {% for game in games %}
+          <div class="col-xs-6 col-sm-4 col-md-3">
+            <div class="game bootcards-summary-item text-center" id="{{ game.gameid}}">
+              <div class="game-time">
+                <span class="label label-default">
+                  {{ game.est }}
+                </span>
+              </div>
+              <div class="game-teams">
+                <div class="team {{ game.away_team|lower }}"></div>
+                <div class="team home {{ game.home_team|lower }}"></div>
+              </div>
+              <div class="game-rating">
+                <span class="label label-warning game-rating-content">?</span>
+              </div>
+              <div class="game-slider hidden">
+                <div class="noUiSlider"></div>
+              </div>
             </div>
           </div>
-          <div class="row game-teams">
-            <div class="col-12">
-              <div class="team {{ game.away_team|lower }}"></div>
-              <div class="team home {{ game.home_team|lower }}"></div>
-            </div>
-          </div>
-          <div class="row game-rating">
-            <div class="col-12">
-              <span class="well well-sm text-center game-rating-content">
-              </span>
-            </div>
-          </div>
-          <div class="row game-slider hidden">
-            <div class="col-12">
-              <div class="noUiSlider"></div>
-            </div>
-          </div>
-        </div>
+        {% endfor %}
       </div>
-    {% endfor %}
+    </div>
   </div>
 {% endblock %}

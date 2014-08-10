@@ -1,5 +1,9 @@
 var FETCH_INTERVAL = 3000,
-    REVIEW_SPAN = 5;
+    REVIEW_SPAN = 5,
+    THRESHOLDS = {
+        'boring': 25,
+        'exciting': 75
+    };
 
 $(function(){
     $('.noUiSlider').noUiSlider({
@@ -12,7 +16,6 @@ $(function(){
         $.getJSON('/review/' + game.attr('id'),
             { 'timespan': REVIEW_SPAN, 'rating': Math.floor($(this).val()) },
             function(data) {
-                game.find('.game-rating-content').html('<strong class="text-success">Thanks!</strong>');
             }
         );
     });
@@ -27,7 +30,7 @@ $(function(){
         $(this).find('.game-slider').addClass('hidden');
     });
 
-    setInterval(function update_metrics() { // Careful, evil hack here.
+    setInterval(function update_metrics() {
         $('.game').each(function(i, elem) {
             var rating = $(elem).find('.game-rating-content');
             if (rating.hasClass('hidden'))
@@ -35,9 +38,17 @@ $(function(){
 
             var gameid = $(elem).attr('id');
             $.getJSON('/ratings/' + gameid, function(data) {
+                if (!(data.avg))
+                    return;
                 rating.html(data.avg);
-                rating.css('font-size', (75 + 50 * data.avg / 100.0) + '%');
-                rating.css('border-width', (data.avg / 100.0) * 3);
+                rating.css('font-size', (100 + 50 * data.avg / 100.0) + '%');
+                rating.removeClass('label-default label-warning label-success label-danger');
+                if (data.avg < THRESHOLDS.boring)
+                    rating.addClass('label-danger');
+                else if (data.avg > THRESHOLDS.exciting)
+                    rating.addClass('label-success');
+                else
+                    rating.addClass('label-default');
             });
         });
 
