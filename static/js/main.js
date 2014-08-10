@@ -9,7 +9,7 @@ $(function(){
         handles: 1
     }).change(function() {
         var game = $(this).closest('.game');
-        $.getJSON('review/' + game.attr('id'),
+        $.getJSON('/review/' + game.attr('id'),
             { 'timespan': REVIEW_SPAN, 'rating': Math.floor($(this).val()) },
             function(data) {
                 game.find('.game-rating-content').html('<strong class="text-success">Thanks!</strong>');
@@ -34,7 +34,7 @@ $(function(){
                 return;
 
             var gameid = $(elem).attr('id');
-            $.getJSON('ratings/' + gameid, function(data) {
+            $.getJSON('/ratings/' + gameid, function(data) {
                 rating.html(data.avg);
                 rating.css('font-size', (75 + 50 * data.avg / 100.0) + '%');
                 rating.css('border-width', (data.avg / 100.0) * 3);

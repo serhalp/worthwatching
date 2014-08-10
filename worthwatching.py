@@ -17,13 +17,16 @@ app.config.update(dict(
 
 est = pytz.timezone('US/Eastern')
 
+ROLLOVER_HOUR = 9
+
 def get_game(gameid):
     return Game.objects(gameid = gameid).first()
 
-def get_todays_games():
-    # Rollover at 9 AM EST (2 PM UTC)
-    target_date = datetime.datetime.combine(datetime.datetime.utcnow().date(), datetime.time(14))
-    next_date = target_date + datetime.timedelta(days = 1)
+def get_games_by_date(date):
+    """Get games starting on this date in EST."""
+    target_date = est.localize(datetime.datetime.combine(date, datetime.time())) \
+        .astimezone(pytz.utc)
+    next_date = target_date + datetime.timedelta(days=1)
     return Game.objects(Q(start__gte = target_date) & Q(start__lt = next_date)) \
         .order_by('start')
 
@@ -35,8 +38,18 @@ def annotate(game):
     return game
 
 @app.route('/')
-def show_games():
-    games = get_todays_games()
+def show_todays_games():
+    now_est = datetime.datetime.now(est)
+    now_est = now_est.replace(month=3) # Shift date for offseason development
+    today_est = now_est.date()
+    if now_est.hour < ROLLOVER_HOUR:
+        today_est -= datetime.timedelta(days=1)
+    games = get_games_by_date(today_est)
+    return flask.render_template('games.html', games = map(annotate, games))
+
+@app.route('/<int:year>/<int:month>/<int:day>')
+def show_games(year, month, day):
+    games = get_games_by_date(datetime.date(year, month, day))
     return flask.render_template('games.html', games = map(annotate, games))
 
 @app.route('/game/<gameid>')
