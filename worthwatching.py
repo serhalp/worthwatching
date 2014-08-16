@@ -45,13 +45,16 @@ def show_todays_games():
     today_est = now_est.date()
     if now_est.hour < ROLLOVER_HOUR:
         today_est -= datetime.timedelta(days=1)
-    games = get_games_by_date(today_est)
-    return flask.render_template('games.html', games = map(annotate, games))
+    return show_games(today_est.year, today_est.month, today_est.day)
 
 @app.route('/<int:year>/<int:month>/<int:day>')
 def show_games(year, month, day):
-    games = get_games_by_date(datetime.date(year, month, day))
-    return flask.render_template('games.html', games = map(annotate, games))
+    date = datetime.date(year, month, day)
+    games = get_games_by_date(date)
+    return flask.render_template('games.html',
+                                 games = map(annotate, games),
+                                 prev_date = date - datetime.timedelta(days=1),
+                                 next_date = date + datetime.timedelta(days=1))
 
 @app.route('/game/<gameid>')
 def show_game(gameid):

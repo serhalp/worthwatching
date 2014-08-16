@@ -1,9 +1,9 @@
 {% extends "layout.html" %}
 {% block content %}
   <div class="center-block date-picker text-center">
-    <div class="pull-left"><span class="glyphicon glyphicon-chevron-left"></span></div>
+    <div class="pull-left"><a href="/{{ prev_date.strftime('%Y/%m/%d') }}"><span class="glyphicon glyphicon-chevron-left"></span></a></div>
     <a class="btn btn-default" role="button" href="/">Today</a>
-    <div class="pull-right"><span class="glyphicon glyphicon-chevron-right"></span></div>
+    <div class="pull-right"><a href="/{{ next_date.strftime('%Y/%m/%d') }}"><span class="glyphicon glyphicon-chevron-right"></span></a></div>
   </div>
 
   <div class="panel panel-default borderless bootcards-summary">

@@ -30,6 +30,10 @@ h1 small {
   margin-top: 8px; /* vertical-align arrows */
 }
 
+.date-picker a {
+  color: #000;
+}
+
 .game-teams {
   width: 200px;
   height: 90px;
