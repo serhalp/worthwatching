@@ -21,11 +21,14 @@
                 <div class="team {{ game.away_team|lower }}"></div>
                 <div class="team home {{ game.home_team|lower }}"></div>
               </div>
-              <div class="game-rating">
-                <span class="label label-warning game-rating-content">?</span>
-              </div>
-              <div class="game-slider hidden">
-                <div class="noUiSlider"></div>
+              <div class="game-rating-and-slider" data-toggle="popover" data-placement="bottom"
+                   data-content="How entertaining have the last five minutes been?">
+                <div class="game-rating">
+                  <span class="label label-warning game-rating-content">?</span>
+                </div>
+                <div class="game-slider hidden">
+                  <div class="noUiSlider"></div>
+                </div>
               </div>
             </div>
           </div>

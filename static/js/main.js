@@ -7,18 +7,22 @@ var FETCH_INTERVAL = 3000,
 
 $(function(){
     $('.noUiSlider').noUiSlider({
-        range: [0, 100],
-        start: 50,
-        step: 1,
-        handles: 1
+        'range': [0, 100],
+        'start': 50,
+        'step': 1,
+        'handles': 1,
+        'connect': 'lower'
     }).change(function() {
         var game = $(this).closest('.game');
         $.getJSON('/review/' + game.attr('id'),
             { 'timespan': REVIEW_SPAN, 'rating': Math.floor($(this).val()) },
             function(data) {
+                update_metrics();
             }
         );
     });
+
+    $('.game-rating-and-slider').popover({ 'trigger': 'hover focus' });
 
     $('.game').mouseover(function() {
         $(this).find('.game-rating').addClass('hidden');
