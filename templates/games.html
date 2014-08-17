@@ -17,9 +17,15 @@
                   {{ game.est }}
                 </span>
               </div>
-              <div class="game-teams">
-                <div class="team {{ game.away_team|lower }}"></div>
-                <div class="team home {{ game.home_team|lower }}"></div>
+              <div class="game-teams center-block">
+                <div class="stretchy team">
+                  <img class="spacer" src="{{ url_for('static', filename='img/spacer.png') }}" />
+                  <img class="sprite {{ game.away_team|lower }}" src="{{ url_for('static', filename='img/logos.png') }}" />
+                </div>
+                <div class="stretchy team home">
+                  <img class="spacer" src="{{ url_for('static', filename='img/spacer.png') }}" />
+                  <img class="sprite {{ game.home_team|lower }}" src="{{ url_for('static', filename='img/logos.png') }}" />
+                </div>
               </div>
               <div class="game-rating-and-slider" data-toggle="popover" data-placement="bottom"
                    data-content="How entertaining have the last five minutes been?">
